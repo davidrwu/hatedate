@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+
+<html lang="en-us">
+
+<head>
+  <meta charset="UTF-8">
+  <title></title>
+
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+  <!-- Firebase Reference -->
+  <script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
+
+    <style type="text/css">
+    .main {
+      background-color:#F70D1A;
+      width:100%;
+    }
+
+    .logo {
+      background-color:black;
+      font-weight:bold;
+      padding-top:50px;
+      padding-bottom:50px;
+      font-size:50px;
+    }
+
+    h3 {
+      font-size:30px;
+    }
+
+    nav {
+      padding-left:10%;
+      padding-right:10%;
+      padding-bottom:10px;
+    }
+
+    .btn-info {
+      margin-left:30px;
+      background-color:#FF2400;
+    }
+
+    #logo {
+      padding-left:50px;
+    }
+
+    .navbar-right {
+      padding-top:30px;
+    }
+
+    .logo,
+    .headliner,
+    .dropdown {
+      color:white;
+    }
+
+    .headliner {
+      padding:30px;
+    }
+
+    .signup{
+      text-align: center;
+      font-size:20px;
+      padding-bottom:70px;
+    }
+
+    .btn {
+      margin-top:10px;
+      font-size: 20px;
+    }
+
+    .btn-mid {
+      background-color: black;
+      color:white;
+    }
+
+    .bodySubmit {
+      padding-top:20px;
+    }
+
+    select {
+      border-radius: 10px;
+      font-size:20px;
+    }
+
+    footer {
+      background-color:#FBBBB9;
+      padding:10px;
+      width:100%;
+      font-size: 15px;
+    }
+
+    .info,
+    .copyright,
+    .images {
+      padding:5px;
+    }
+
+  </style>
+
+</head>
+
+<body>
+<div class="row">
+  <nav class="navbar navbar-default">
+    <div class="container-fluid navbar-custom">
+        
+      <!-- Brand and toggle get grouped for better mobile display -->
+      
+         <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+          <img src="logo.jpg" id="logo"></a>
+          <div class="nav navbar-nav navbar-right navbar-right-custom">
+            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#sign-up-modal">Sign Up</button>
+
+            <div class="modal fade" id="sign-up-modal" role="dialog">
+              <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Sign Up</h4>
+                  </div>
+                  <div class="modal-body">
+                    <form>
+                      <div class="form-group">
+                        <label for="newUser-input">Name</label>
+                        <input class="form-control" id="newUser-input" type="text">
+                      </div>
+                      <div class="form-group">
+                        <label for="newEmail-input">Email</label>
+                        <input class="form-control" id="newEmail-input" type="text">
+                      </div>
+                      <div class="form-group">
+                        <label for="newPassword-input">Password</label>
+                        <input class="form-control" id="newPassword-input" type="text">
+                      </div>
+                    </form>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" id="newUser" class="btn btn-default" data-dismiss="modal">Submit</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#login-modal">Log In</button>
+
+            <div class="modal fade" id="login-modal" role="dialog">
+              <div class="modal-dialog">
+                <!-- Modal content-->
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Log In</h4>
+                  </div>
+                  <div class="modal-body">
+                    <form>
+                      <div class="form-group">
+                        <label for="name-input">Name</label>
+                        <input class="form-control" id="name-input" type="text">
+                      </div>
+                      <div class="form-group">
+                        <label for="password-input">Password</label>
+                        <input class="form-control" id="password-input" type="text">
+                      </div>
+                    </form>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+        </div><!-- /.navbar-collapse -->
+      </div>
+    </div><!-- /.container-fluid -->
+  </nav>
+  <div class="main">
+    <div class="row">
+      <div class="col-lg-12" style="text-align:center">
+        <h1 class="logo">Hate Date</h1>
+        <h3 class="headliner">We always think about things we hate all the time.
+          <p>Why not date based on deal breakers.</p>
+        </h3>
+      </div>
+    </div>
+
+  <div class="row signup">
+    <div class="col-lg-12">
+      <span class="dropdown">I am a</span>
+        <label>
+          <select>
+            <option><a href="#">man</a></option>
+            <option><a href="#">woman</a></option>
+          </select>
+        </label>
+      <span class="dropdown">who hates, when </span><br>
+          <label>
+            <select>
+              <option><a href="#">he</a></option>
+              <option><a href="#">she</a></option>
+            </select>
+          </label>
+      <span class="dropdown">is not a good listener</span>
+    </div>
+    <div class="col-lg-12 bodySubmit"> 
+      <button type="button" class="btn btn-mid btn-lg" data-toggle="modal" data-target="#sign-up-modal">Continue</button>    
+    </div>
+  </div>
+</div>
+</div>
+</div>
+
+<div class="row">
+  <footer class="footer">
+    <section id="social-media-area" style="text-align:center">
+      <div class="social-media-content">
+        <div class="images">
+          <img src="#" alt="" class="social-media-photo">
+          <img src="#" alt="" class="social-media-photo">
+          <img src="#" alt="" class="social-media-photo">
+        </div>
+      </div>
+      <div class="about-us">
+        <a href="#" class="info">About Us</a>
+        <a href="#" class="info">Company</a>
+      </div>
+      <div class="copyright">&copy; Hate Date 2017</div>
+    </section>
+    </div>
+  </footer>      
+
+<script src="hatedate.js"></script>
+
+</body>
+</html>
+
+
+
+
+
