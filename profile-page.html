@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <title>Bootstrap Basic Portfolio</title>
+
+    <!-- Boostrap Stylesheet -->
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <!-- Our own CSS stylesheet -->
+    <link rel="stylesheet" href="assets/css/styles.css" media="screen">
+
+    <style type="text/css">
+
+      body{
+        background-color:#F70D1A;
+      }
+
+      .navbar-right-custom {
+        font-size:25px;
+      }
+
+      nav {
+        padding-left:10%;
+        padding-right:10%;
+        padding-bottom:10px;
+      }
+
+      .userName {
+        font-size: 30px;
+        text-align: center;
+        padding:20px;
+      }
+
+      .about-me-content {
+        border:solid;
+        height:600px;
+        background-color:white;
+        text-align: center;
+        padding:20px;
+      }
+
+      .hate-content{
+        border:solid;
+        height:600px;
+        background-color:white;
+        text-align: center;
+        padding:20px;
+      }
+
+      .wrap {
+        padding-bottom:15px;
+      }
+
+      #profile-image {
+        padding:10px;
+      }
+
+      footer {
+        background-color:#FBBBB9;
+        padding:10px;
+        width:100%;
+        font-size: 15px;
+      }
+      
+    </style>
+
+  </head>
+
+  <body>
+    <!-- Start of navbar -->
+    <nav class="navbar navbar-default">
+      <div class="container-fluid navbar-custom">
+
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="row">
+          <div class="navbar-header">
+ 
+            <div class="col-xs-12 phone-nav">
+              <span class="navbar-brand userName" href="#" >Username</span>
+            </div>
+          </div>
+
+          <!-- Collect the nav links, forms, and other content for toggling -->
+          <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right navbar-right-custom">
+              <li><a href="contact.html">My Profile</a></li>
+              <li><a href="portfolio.html">Survey</a></li>
+              <li><a href="index.html">Log Out</a></li>
+            </ul>
+          </div><!-- /.navbar-collapse -->
+        </div>
+      </div><!-- /.container-fluid -->
+    </nav>
+    <!-- End of navbar -->
+
+    <!-- Start of content wrap -->
+    <div class="wrap">
+      <div class="container">
+        <section class="row">
+          <div class="col-md-4">
+            <article class="about-me-content">
+              <img src="http://placehold.it/200x200" alt="" id="profile-image"/>
+              <div id="name"></div>
+              <div id="location"></div>
+              <div id="age"></div>
+              <div id=""></div>
+              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+            </article>
+          </div>
+          
+          <div class="col-md-8">
+            <!-- Start of Connect With Me Area -->
+            <section id="hate-area">
+              <div class="hate-content">
+                <h1 class="hate-header">People I Matched With</h1>
+                  <div id="images">
+                  <img src="http://placehold.it/200x200" alt="" class="connect-with-me-photo">
+                  <img src="http://placehold.it/200x200" alt="" class="connect-with-me-photo">
+                  <img src="http://placehold.it/200x200" alt="" class="connect-with-me-photo">
+                </div>
+              </div>
+            </section>
+ -->
+          </div>
+        </section>
+      </div>
+    </div>
+    <!-- End of content wrap -->
+
+    <!-- Start of footer -->
+<div class="row">
+  <footer class="footer">
+    <section id="social-media-area" style="text-align:center">
+      <div class="social-media-content">
+        <div class="images">
+          <img src="#" alt="" class="social-media-photo">
+          <img src="#" alt="" class="social-media-photo">
+          <img src="#" alt="" class="social-media-photo">
+        </div>
+      </div>
+      <div class="about-us">
+        <a href="#" class="info">About Us</a>
+        <a href="#" class="info">Company</a>
+      </div>
+      <div class="copyright">&copy; Hate Date 2017</div>
+    </section>
+    </div>
+  </footer>      
+</div>
+    <!-- End of footer -->
+
+    <!-- jQuery CDN -->
+    <script type="text/javascript" src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+
+    <!-- Bootstrap CDN -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+  </body>
+
+</html>
