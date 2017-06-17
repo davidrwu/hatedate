@@ -12,40 +12,43 @@
      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script  src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.2.2/jquery.min.js"></script>
+    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <script src="https://fezvrasta.github.io/bootstrap-material-design/dist/js/material.min.js"></script>
+    <script src="https://fezvrasta.github.io/bootstrap-material-design/dist/js/ripples.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.2/angular.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/angular-filter/0.5.8/angular-filter.js"></script>
+    <script src="https://cdn.firebase.com/js/client/2.2.4/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
+    <script src="http://cdn.firebase.com/libs/angularfire/1.2.0/angularfire.min.js"></script>
 
     <!-- Our own CSS stylesheet -->
     <link rel="stylesheet" href="assets/css/styles.css" media="screen">
 
     <style type="text/css">
-
       body{
         background-color:#F70D1A;
       }
-
       .navbar-right-custom {
         font-size:25px;
       }
-
       nav {
         padding-left:10%;
         padding-right:10%;
         padding-bottom:10px;
       }
-
       .userName {
         font-size: 30px;
         text-align: center;
         padding:20px;
       }
-
       .about-me-content {
         border:solid;
-        height:600px;
+        overflow:auto;
         background-color:white;
         text-align: center;
         padding:20px;
       }
-
       .hate-content{
         border:solid;
         height:600px;
@@ -53,15 +56,12 @@
         text-align: center;
         padding:20px;
       }
-
       .wrap {
         padding-bottom:15px;
       }
-
       #profile-image {
         padding:10px;
       }
-
       footer {
         background-color:#FBBBB9;
         padding:10px;
@@ -100,19 +100,70 @@
     </nav>
     <!-- End of navbar -->
 
+
     <!-- Start of content wrap -->
     <div class="wrap">
       <div class="container">
         <section class="row">
           <div class="col-md-4">
             <article class="about-me-content">
-              <img src="http://placehold.it/200x200" alt="" id="profile-image"/>
+
+            <!-- Sumbit Photo -->
+              
+          <div ng-app='img2fire'>
+            <div ng-controller='base64Ctrl'>
+        <div class="container-fluid">
+        <p class="text-info" align="center">Upload Your Profile Photo</p>
+       <hr />
+
+      <form ng-submit="uploadFile()">
+        <input type="file" name="file" class="inputimg" id="nameImg" accept="image/*">       
+        <br />
+        <span class="input-group-btn">
+          <button  type="submit" class="btn btn-block"> 
+                  <i class="material-icons">Submit Photo</i>
+                </button>
+          </span>
+      </form>
+      <hr />
+      <div ng-repeat="img in imgs | toArray | orderBy: '-date'" class="col-xs-12 col-sm-6 col-md-3">
+        <img ng-src="{{img.base64}}">
+        <a class="btn btn-danger btn-block" ng-click="deleteimg(img.$id)">Delete</a>
+      </div>
+    </div>
+  </div>
+
+      <hr>
+
+               <!--  Form Info-->
+
               <div id="name"></div>
               <div id="location"></div>
               <div id="age"></div>
               <div id=""></div>
-              <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+
+              <!-- Profile Form to capture info-->
+         <form id="profile-info">
+              <label for="age-input">Email:</label>
+              <input class="form-control" id="profile-email" type="text">
+              <label for="age-input">First Name:</label>
+              <input class="form-control" id="profile-first-name" type="text">
+              <label for="age-input">Last Name:</label>
+              <input class="form-control" id="profile-last-name" type="text">
+              <label for="age-input">Age:</label>
+              <input class="form-control" id="profile-age" type="text">
+              <label for="age-input">Gender:</label>
+              <input class="form-control" id="profile-gender" type="text">
+              <label for="age-input">City:</label>
+              <input class="form-control" id="profile-city" type="text">
+              <label for="age-input">State:</label>
+              <input class="form-control" id="profile-state" type="text">
+
+              <button class="btn btn-default" id="add-profile" type="submit">Submit</button>
+          </form>
             </article>
+
+        
           </div>
           
           <div class="col-md-8">
@@ -127,7 +178,7 @@
                 </div>
               </div>
             </section>
- -->
+
           </div>
         </section>
       </div>
@@ -161,6 +212,193 @@
 
     <!-- Bootstrap CDN -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+
+    <script>
+    var config = {
+      apiKey: "AIzaSyCoMO4JICSt88ZIMpok7Jvv7bhyVIMYErw",
+      authDomain: "datingproj-44fa5.firebaseapp.com",
+      databaseURL: "https://datingproj-44fa5.firebaseio.com",
+      projectId: "datingproj-44fa5",
+      storageBucket: "datingproj-44fa5.appspot.com",
+      messagingSenderId: "834628368468"
+      };
+      firebase.initializeApp(config);
+
+      var database = firebase.database();
+
+      database.ref().on("child_added", function(childsnapshot) {
+
+       var profileAge = childsnapshot.val().profileAge;
+       var profileEmail = childsnapshot.val().profileEmail;
+       var profileFirstName = childsnapshot.val().profileFirstName;
+       var profileLastName = childsnapshot.val().profileLastName;
+  
+       var profileGender = childsnapshot.val().profileGender;
+       var profileCity = childsnapshot.val().profileCity;
+       var profileState = childsnapshot.val().profileState;
+       var Q1 = childsnapshot.val().Q1;
+       var Q2 = childsnapshot.val().Q2;
+       var Q3 = childsnapshot.val().Q3;
+       var Q4 = childsnapshot.val().Q4;
+       var Q5 = childsnapshot.val().Q5;
+       var Q6 = childsnapshot.val().Q6;
+       var Q7 = childsnapshot.val().Q7;
+       var Q8 = childsnapshot.val().Q8;
+       var Q9 = childsnapshot.val().Q9;
+       var Q10 = childsnapshot.val().Q10;
+       
+    
+});
+
+$("#add-profile").on("click", function() {
+  var questionVal = false;
+
+  var profileAge = $("#profile-age").val().trim();
+  var profileEmail = $("#profile-email").val().trim();
+  var profileFirstName = $("#profile-first-name").val().trim();
+  var profileLastName = $("#profile-last-name").val().trim();
+  var profileGender = $("#profile-gender").val().trim();
+  var profileCity = $("#profile-city").val().trim();
+  var profileState = $("#profile-state").val().trim();
+
+  
+  var newProfile = {
+        profileEmail: profileEmail,
+        profileAge: profileAge,
+        profileFirstName: profileFirstName,
+        profileLastName: profileLastName,
+        profileGender: profileGender,
+        profileCity: profileCity,
+        profileState: profileState,
+        Q1: questionVal,
+        Q2: questionVal,
+        Q3: questionVal,
+        Q4: questionVal,
+        Q5: questionVal,
+        Q6: questionVal,
+        Q7: questionVal,
+        Q8: questionVal,
+        Q9: questionVal,
+        Q10: questionVal
+      
+    }
+    // var updateProfile = {
+
+    //     profileEmail: profileEmail,
+    //     profileAge: profileAge,
+    //     profileFirstName: profileFirstName,
+    //     profileLastName: profileLastName,
+    //     profileGender: profileGender,
+    //     profileCity: profileCity,
+    //     profileState: profileState,
+    //     Q0: qAnswer[0],
+    //     Q1: qAnswer[1],
+    //     Q2: qAnswer[2],
+    //     Q3: qAnswer[3],
+    //     Q4: qAnswer[4],
+    //     Q5: qAnswer[5],
+    //     Q6: qAnswer[6],
+    //     Q7: qAnswer[7],
+    //     Q8: qAnswer[8],
+    //     Q9: qAnswer[9],
+    //     Q10: qAnswer[10],
+    //     Q11: qAnswer[11],
+    //     Q12: qAnswer[12],
+    //     Q13: qAnswer[13],
+    //     Q14: qAnswer[14],
+    //     Q15: qAnswer[15],
+    //     Q16: qAnswer[16],
+    //     Q17: qAnswer[17],
+    //     Q18: qAnswer[18],
+    //     Q19: qAnswer[19],
+    //     Q20: qAnswer[20],
+    //     Q21: qAnswer[21],
+    //     Q22: qAnswer[22],
+    //     Q23: qAnswer[23],
+    //     Q24: qAnswer[24]
+
+    // }
+
+    //console.log(newProfile);
+    database.ref().push(newProfile);
+
+    
+
+    return false;
+});
+ 
+
+
+  //Image upload Javascript
+      var img2fire = angular.module('img2fire', ['firebase', 'angular.filter']);
+
+        img2fire.controller("base64Ctrl", function($scope, $firebaseArray) {
+      
+        var ref = new Firebase("https://datingproj-44fa5.firebaseio.com/");
+        //var img = new Firebase("https://datingproj-44fa5.appspot.com/profile-pics");
+  
+        var img = new Firebase("https://datingproj-44fa5.firebaseio.com/profile-pics");
+        $scope.imgs = $firebaseArray(img);
+
+        var _validFileExtensions = [".jpg", ".jpeg", ".bmp", ".gif", ".png"];
+        $scope.uploadFile = function() {
+        var sFileName = $("#nameImg").val();
+
+        if (sFileName.length > 0) {
+          var blnValid = false;
+        for (var j = 0; j < _validFileExtensions.length; j++) {
+        var sCurExtension = _validFileExtensions[j];
+        if (sFileName.substr(sFileName.length - sCurExtension.length, sCurExtension.length).toLowerCase() == sCurExtension.toLowerCase()) {
+          blnValid = true;
+          var filesSelected = document.getElementById("nameImg").files;
+          if (filesSelected.length > 0) {
+            var fileToLoad = filesSelected[0];
+
+            var fileReader = new FileReader();
+
+            fileReader.onload = function(fileLoadedEvent) {
+              var textAreaFileContents = document.getElementById(
+                "textAreaFileContents"
+              );
+
+
+              $scope.imgs.$add({
+                date: Firebase.ServerValue.TIMESTAMP,
+                base64: fileLoadedEvent.target.result
+
+              });
+            };
+
+            fileReader.readAsDataURL(fileToLoad);
+          }
+          break;
+        }
+      }
+
+      if (!blnValid) {
+        alert('File is not valid');
+        return false;
+      }
+    }
+
+    return true;
+  }
+
+  $scope.deleteimg = function(imgid) {
+    var r = confirm("Do you want to remove this image ?");
+    if (r == true) {
+      $scope.imgs.forEach(function(childSnapshot) {
+        if (childSnapshot.$id == imgid) {
+            $scope.imgs.$remove(childSnapshot).then(function(ref) {
+              ref.key() === childSnapshot.$id; // true
+            });
+        }
+      });
+    }
+  }
+
+});
+</script>
   </body>
 
 </html>
