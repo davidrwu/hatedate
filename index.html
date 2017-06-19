@@ -1,20 +1,16 @@
-<!DOCTYPE html>
+  <!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>FirebaseUI Auth Demo</title>
+    <script src="https://www.gstatic.com/firebasejs/live/4.1/firebase.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://cdn.firebase.com/libs/firebaseui/2.1.1/firebaseui.js"></script>
 
-<html lang="en-us">
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.1.1/firebaseui.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<head>
-  <meta charset="UTF-8">
-  <title></title>
-
-  <!-- Bootstrap -->
-  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-  <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
-  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
-
-  <!-- Firebase Reference -->
-  <script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
-
-    <style type="text/css">
+<style type="text/css">
     .main {
       background-color:#F70D1A;
       width:100%;
@@ -23,9 +19,10 @@
     .logo {
       background-color:black;
       font-weight:bold;
-      padding-top:50px;
-      padding-bottom:50px;
+      padding-top:20px;
+      padding-bottom:20px;
       font-size:50px;
+      margin:0;
     }
 
     h3 {
@@ -35,7 +32,7 @@
     nav {
       padding-left:10%;
       padding-right:10%;
-      padding-bottom:10px;
+      padding-bottom:20px;
     }
 
     .btn-info {
@@ -45,6 +42,7 @@
 
     #logo {
       padding-left:50px;
+      padding-right:40px;
     }
 
     .navbar-right {
@@ -57,9 +55,6 @@
       color:white;
     }
 
-    .headliner {
-      padding:30px;
-    }
 
     #location-form {
     }
@@ -101,6 +96,20 @@
     .images {
       padding:5px;
     }
+   .weatherDiv {
+      padding:10px;
+    }
+    #location-form {
+      position: absolute;
+    }
+    .weatherCon {
+      float:right;
+      padding:20px;
+    }
+    .weatherHeader {
+      font-weight: bold;
+    }
+ 
 
   </style>
 
@@ -110,83 +119,40 @@
 <div class="row">
   <nav class="navbar navbar-default">
     <div class="container-fluid navbar-custom">
+
+      <div id="loading">Loading...</div>
+      <div id="loaded" class="hidden">
+          <div id="user-signed-in" class="hidden" style="float:right">
+            <p>
+              <button id="sign-out">Sign Out</button>
+              <button id="delete-account">Delete account</button>
+            </p>
+          </div>
+          <div id="user-signed-out" class="hidden" style="float:right">
+            <div id="firebaseui-spa">
+              <div id="firebaseui-container"></div>
+            </div>
+          </div>
+        </div> 
+    </div>
+    
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <img src="logo.jpg" id="logo">
 
- 
+        <span id="location-form">
+          <input type="text" id="location-input">
+          <input id="add-weather" type="submit" value="Enter Location">
 
-          <div class="nav navbar-nav navbar-right navbar-right-custom">         
-            <span id="location-form">
-              <input type="text" id="location-input">
+          
+        <div id="weatherDisplay" class="weatherDiv"></div>
+        </span>
 
-              <input id="add-weather" type="submit" value="Location">
-            </span>
-
-             <span id="weatherDisplay"></span>
-            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#sign-up-modal">Sign Up</button>
-
-            <div class="modal fade" id="sign-up-modal" role="dialog">
-              <div class="modal-dialog">
-                <!-- Modal content-->
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Sign Up</h4>
-                  </div>
-                  <div class="modal-body">
-                    <form>
-                      <div class="form-group">
-                        <label for="newUser-input">Name</label>
-                        <input class="form-control" id="newUser-input" type="text">
-                      </div>
-                      <div class="form-group">
-                        <label for="newEmail-input">Email</label>
-                        <input class="form-control" id="newEmail-input" type="text">
-                      </div>
-                      <div class="form-group">
-                        <label for="newPassword-input">Password</label>
-                        <input class="form-control" id="newPassword-input" type="text">
-                      </div>
-                    </form>
-                  </div>
-                  <div class="modal-footer">
-                    <button type="button" id="newUser" class="btn btn-default" data-dismiss="modal">Submit</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-
-            <button type="button" class="btn btn-info btn-lg" data-toggle="modal" data-target="#login-modal">Log In</button>
-
-            <div class="modal fade" id="login-modal" role="dialog">
-              <div class="modal-dialog">
-                <!-- Modal content-->
-                <div class="modal-content">
-                  <div class="modal-header">
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Log In</h4>
-                  </div>
-                  <div class="modal-body">
-                    <form>
-                      <div class="form-group">
-                        <label for="name-input">Name</label>
-                        <input class="form-control" id="name-input" type="text">
-                      </div>
-                      <div class="form-group">
-                        <label for="password-input">Password</label>
-                        <input class="form-control" id="password-input" type="text">
-                      </div>
-                    </form>
-                  <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-                  </div>
-                </div>
-              </div>
-            </div>
-        </div><!-- /.navbar-collapse -->
       </div>
-    </div><!-- /.container-fluid -->
+    </div><!-- /.navbar-collapse -->
+
   </nav>
+</div>
+
   <div class="main">
     <div class="row">
       <div class="col-lg-12" style="text-align:center">
@@ -216,8 +182,7 @@
       <span class="dropdown">is not a good listener</span>
     </div>
     <div class="col-lg-12 bodySubmit"> 
-      <button type="button" class="btn btn-mid btn-lg" data-toggle="modal" data-target="#sign-up-modal">Continue</button>    
-    </div>
+     
   </div>
 </div>
 </div>
@@ -242,13 +207,6 @@
     </div>
   </footer>      
 </div>
-
-<script src="hatedate.js"></script>
-
-</body>
+    <script src="app.js"></script>
+  </body>
 </html>
-
-
-
-
-
