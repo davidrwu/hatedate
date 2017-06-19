@@ -142,7 +142,7 @@ event.preventDefault();
 var userLocation = $("#location-input").val().trim();
 // The movie from the textbox is then added to our array
 var APIKey = "166a433c57516f51dfab1f7edaed8413";
-var queryURL = "https://ipapi.co/http://api.openweathermap.org/data/2.5/weather?" +
+var queryURL = "https://cors-anywhere.herokuapp.com/http://ip-api.com/json/http://api.openweathermap.org/data/2.5/weather?" +
   "q="+userLocation+"&units=imperial&appid=" + APIKey;
 
 // Here we run our AJAX call to the OpenWeatherMap API
