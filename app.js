@@ -74,7 +74,6 @@ var handleSignedInUser = function(user) {
     document.getElementById('photo').style.display = 'none';
   }
 
-  // window.location.assign("profile.html")  
 };
 
 
@@ -141,9 +140,10 @@ event.preventDefault();
 // This line will grab the text from the input box
 var userLocation = $("#location-input").val().trim();
 // The movie from the textbox is then added to our array
-var APIKey = "166a433c57516f51dfab1f7edaed8413";
-var queryURL = "http://api.openweathermap.org/data/2.5/weather?" +
-  "q="+userLocation+"&units=imperial&appid=" + APIKey;
+var APIKey = "8e0a569e0df74e849d282d50ea2c2232";
+var queryURL = "https://api.weatherbit.io/v1.0/current/geosearch?city="
+                + userLocation + "&key=" + APIKey;
+  
 
 // Here we run our AJAX call to the OpenWeatherMap API
 $.ajax({
@@ -156,13 +156,14 @@ $.ajax({
 console.log(queryURL);
 
 console.log(response);
+console.log(response.data[0].weather.description);
 
-var weatherResult = response.weather[0].description
-var locationResult = response.name;
+var weatherResult = response.data[0].weather.description
+var locationResult = response.data[0].city_name;
 var weatherDisplay = $("<img>")
 weatherDisplay.addClass('weatherDiv')
 
-if(weatherResult === "clear sky") {
+if(weatherResult === "Clear sky") {
   weatherDisplay.attr('src',"images/clear.png")
   $("#weatherDisplay").html("<span class='weatherHeader'>" + locationResult +" weather has "+weatherResult+"<div>")
   $("#weatherDisplay").append(weatherDisplay);
