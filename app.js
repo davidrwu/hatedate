@@ -168,12 +168,12 @@ if(weatherResult === "Clear sky") {
   $("#weatherDisplay").html("<span class='weatherHeader'>" + locationResult +" weather has "+weatherResult+"<div>")
   $("#weatherDisplay").append(weatherDisplay);
   $("#weatherDisplay").append("<div class='weatherCon'> Perfect day to go out. <br> Don't forget sunscreen. </div></span>");
-} else if (weatherResult === "broken clouds") {
+} else if (weatherResult === "Broken clouds") {
   weatherDisplay.attr('src',"images/light-clouds.png")
   $("#weatherDisplay").html("<span class='weatherHeader'>" + locationResult +" weather has "+weatherResult+"<div>")
   $("#weatherDisplay").append(weatherDisplay);
   $("#weatherDisplay").append("<div class='weatherCon'> Bring a light jacket </div></span>");
-} else if (weatherResult === "mist") {
+} else if (weatherResult === "Light rain") {
   weatherDisplay.attr('src',"images/light-rain.png")
   $("#weatherDisplay").html("<span class='weatherHeader'>" + locationResult +" weather has "+weatherResult+"<div>")
   $("#weatherDisplay").append(weatherDisplay);
