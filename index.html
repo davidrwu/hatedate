@@ -1,193 +1,213 @@
-/*
- * Copyright 2016 Google Inc. All Rights Reserved.
- *
- * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
- * in compliance with the License. You may obtain a copy of the License at
- *
- * http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software distributed under the
- * License is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either
- * express or implied. See the License for the specific language governing permissions and
- * limitations under the License.
- */
+  <!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>FirebaseUI Auth Demo</title>
+    <script src="https://www.gstatic.com/firebasejs/live/4.1/firebase.js"></script>
+    <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
+    <script src="https://cdn.firebase.com/libs/firebaseui/2.1.1/firebaseui.js"></script>
 
-/**
- * FirebaseUI initialization to be used in a Single Page application context.
- */
-var config = {
-  apiKey: "AIzaSyCsk5WGqR1YlbaJiCnYbs1lgPgEQZAopr8",
-  authDomain: "hate-date.firebaseapp.com",
-  databaseURL: "https://hate-date.firebaseio.com",
-  projectId: "hate-date",
-  storageBucket: "hate-date.appspot.com",
-  messagingSenderId: "509489897704"
-};
-firebase.initializeApp(config);
-/**
- * @return {!Object} The FirebaseUI config.
- */
-function getUiConfig() {
-  return {
-    'callbacks': {
-      // Called when the user has been successfully signed in.
-      'signInSuccess': function(user, credential, redirectUrl) {
-        window.location.assign("profile.html")  
-      }
-    },
-    // Opens IDP Providers sign-in flow in a popup.
-    'signInFlow': 'popup',
-    'signInOptions': [
-      // TODO(developer): Remove the providers you don't need for your app.
-      {
-        provider: firebase.auth.EmailAuthProvider.PROVIDER_ID,
-        // Whether the display name should be displayed in Sign Up page.
-        requireDisplayName: true
-      },
-      {
-        provider: firebase.auth.PhoneAuthProvider.PROVIDER_ID,
-        
-      }
-    ],
-    // Terms of service url.
-    'tosUrl': 'https://www.google.com'
-  };
-}
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/2.1.1/firebaseui.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-// Initialize the FirebaseUI Widget using Firebase.
-var ui = new firebaseui.auth.AuthUI(firebase.auth());
-
-/**
- * Displays the UI for a signed in user.
- * @param {!firebase.User} user
- */
-var handleSignedInUser = function(user) {
-  document.getElementById('user-signed-in').style.display = 'block';
-  document.getElementById('user-signed-out').style.display = 'none';
-  document.getElementById('name').textContent = user.displayName;
-  document.getElementById('email').textContent = user.email;
-  document.getElementById('phone').textContent = user.phoneNumber;
-  if (user.photoURL){
-    document.getElementById('photo').src = user.photoURL;
-    document.getElementById('photo').style.display = 'block';
-  } else {
-    document.getElementById('photo').style.display = 'none';
-  }
-
-};
-
-
-/**
- * Displays the UI for a signed out user.
- */
-var handleSignedOutUser = function() {
-  document.getElementById('user-signed-in').style.display = 'none';
-  document.getElementById('user-signed-out').style.display = 'block';
-  ui.start('#firebaseui-container', getUiConfig());
-
-};
-
-// Listen to change in auth state so it displays the correct UI for when
-// the user is signed in or not.
-firebase.auth().onAuthStateChanged(function(user) {
-  document.getElementById('loading').style.display = 'none';
-  document.getElementById('loaded').style.display = 'block';
-  user ? handleSignedInUser(user) : handleSignedOutUser();
-
-
-});
-
-/**
- * Deletes the user's account.
- */
-var deleteAccount = function() {
-  firebase.auth().currentUser.delete().catch(function(error) {
-    if (error.code == 'auth/requires-recent-login') {
-      // The user's credential is too old. She needs to sign in again.
-      firebase.auth().signOut().then(function() {
-        // The timeout allows the message to be displayed after the UI has
-        // changed to the signed out state.
-        setTimeout(function() {
-          alert('Please sign in again to delete your account.');
-        }, 1);
-      });
+    <style type="text/css">
+    
+    .main {
+      background-color:#F70D1A;
+      width:100%;
     }
-  });
-};
 
-/**
- * Initializes the app.
- */
-var initApp = function() {
-  document.getElementById('sign-out').addEventListener('click', function() {
-    firebase.auth().signOut();
-  });
-  document.getElementById('delete-account').addEventListener(
-      'click', function() {
-        deleteAccount();
-      });
+    .logo {
+      background-color:black;
+      font-weight:bold;
+      padding-top:20px;
+      padding-bottom:20px;
+      font-size:50px;
+      margin:0;
+    }
 
-};
+    h3 {
+      font-size:30px;
+    }
 
-window.addEventListener('load', initApp);
+    nav {
+      padding-left:10%;
+      padding-right:10%;
+      padding-bottom:20px;
+    }
 
+    .btn-info {
+      margin-left:30px;
+      background-color:#FF2400;
+    }
 
+    #logo {
+      padding-left:50px;
+      padding-right:40px;
+    }
 
-$("#add-weather").on("click", function(event) {
+    .navbar-right {
+      padding-top:30px;
+    }
 
-event.preventDefault();
-
-// This line will grab the text from the input box
-var userLocation = $("#location-input").val().trim();
-// The movie from the textbox is then added to our array
-var APIKey = "8e0a569e0df74e849d282d50ea2c2232";
-var queryURL = "https://api.weatherbit.io/v1.0/current/geosearch?city="
-                + userLocation + "&key=" + APIKey;
-  
-
-// Here we run our AJAX call to the OpenWeatherMap API
-$.ajax({
-    url: queryURL,
-    method: "GET"
-  })
-// We store all of the retrieved data inside of an object called "response"
-.done(function(response) {
-
-console.log(queryURL);
-
-console.log(response);
-console.log(response.data[0].weather.description);
-
-var weatherResult = response.data[0].weather.description
-var locationResult = response.data[0].city_name;
-var weatherDisplay = $("<img>")
-weatherDisplay.addClass('weatherDiv')
-
-if(weatherResult === "Clear sky") {
-  weatherDisplay.attr('src',"images/clear.png")
-  $("#weatherDisplay").html("<span class='weatherHeader'>" + locationResult +" weather has "+weatherResult+"<div>")
-  $("#weatherDisplay").append(weatherDisplay);
-  $("#weatherDisplay").append("<div class='weatherCon'> Perfect day to go out. <br> Don't forget sunscreen. </div></span>");
-} else if (weatherResult === "broken clouds") {
-  weatherDisplay.attr('src',"images/light-clouds.png")
-  $("#weatherDisplay").html("<span class='weatherHeader'>" + locationResult +" weather has "+weatherResult+"<div>")
-  $("#weatherDisplay").append(weatherDisplay);
-  $("#weatherDisplay").append("<div class='weatherCon'> Bring a light jacket </div></span>");
-} else if (weatherResult === "mist") {
-  weatherDisplay.attr('src',"images/light-rain.png")
-  $("#weatherDisplay").html("<span class='weatherHeader'>" + locationResult +" weather has "+weatherResult+"<div>")
-  $("#weatherDisplay").append(weatherDisplay);
-  $("#weatherDisplay").append("<div class='weatherCon'> This is still a datable weather </div></span>");
-} else if (weatherResult === "moderate rain") {
-  weatherDisplay.attr('src',"images/heavy-rain.png")
-  $("#weatherDisplay").html("<span class='weatherHeader'>" + locationResult +" weather has "+weatherResult+"<div>")
-  $("#weatherDisplay").append(weatherDisplay);
-  $("#weatherDisplay").append("<div class='weatherCon'> Find an indoor activity to do </div></span>");
-}
+    .logo,
+    .headliner,
+    .dropdown {
+      color:white;
+    }
 
 
+    #location-form {
+    }
 
-// $("#weatherDisplay").html()
+    .signup{
+      text-align: center;
+      font-size:20px;
+      padding-bottom:70px;
+    }
 
-});
-});
+    .btn {
+      margin-top:10px;
+      font-size: 20px;
+    }
+
+    .btn-mid {
+      background-color: black;
+      color:white;
+    }
+
+    .bodySubmit {
+      padding-top:20px;
+    }
+
+    select {
+      border-radius: 10px;
+      font-size:20px;
+    }
+
+    footer {
+      background-color:#FBBBB9;
+      padding:10px;
+      width:100%;
+      font-size: 15px;
+    }
+
+    .info,
+    .copyright,
+    .images {
+      padding:5px;
+    }
+   .weatherDiv {
+      padding:10px;
+    }
+    #location-form {
+      position: absolute;
+    }
+    .weatherCon {
+      float:right;
+      padding:20px;
+    }
+    .weatherHeader {
+      font-weight: bold;
+    }
+ 
+
+  </style>
+
+</head>
+
+<body>
+<div class="row">
+  <nav class="navbar navbar-default">
+    <div class="container-fluid navbar-custom">
+
+      <div id="loading">Loading...</div>
+      <div id="loaded" class="hidden">
+          <div id="user-signed-in" class="hidden" style="float:right">
+            <p>
+              <button id="sign-out">Sign Out</button>
+              <button id="delete-account">Delete account</button>
+            </p>
+          </div>
+          <div id="user-signed-out" class="hidden" style="float:right">
+            <div id="firebaseui-spa">
+              <div id="firebaseui-container"></div>
+            </div>
+          </div>
+        </div> 
+    </div>
+    
+      <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <img src="logo.jpg" id="logo">
+
+        <span id="location-form">
+          <input type="text" id="location-input">
+          <input id="add-weather" type="submit" value="Enter Location">
+
+          
+        <div id="weatherDisplay" class="weatherDiv"></div>
+        </span>
+
+      </div>
+    </div><!-- /.navbar-collapse -->
+
+  </nav>
+</div>
+
+  <div class="main">
+    <div class="row">
+      <div class="col-lg-12" style="text-align:center">
+        <h1 class="logo">Hate Date</h1>
+        <h3 class="headliner">We always think about things we hate all the time.
+          <p>Why not date based on deal breakers.</p>
+        </h3>
+      </div>
+    </div>
+
+  <div class="row signup">
+    <div class="col-lg-12">
+      <span class="dropdown">I am a</span>
+        <label>
+          <select>
+            <option><a href="#">man</a></option>
+            <option><a href="#">woman</a></option>
+          </select>
+        </label>
+      <span class="dropdown">who hates, when </span><br>
+          <label>
+            <select>
+              <option><a href="#">he</a></option>
+              <option><a href="#">she</a></option>
+            </select>
+          </label>
+      <span class="dropdown">is not a good listener</span>
+    </div>
+    <div class="col-lg-12 bodySubmit"> 
+     
+  </div>
+</div>
+</div>
+</div>
+
+<div class="row">
+  <footer class="footer">
+    <section id="social-media-area" style="text-align:center">
+      <div class="social-media-content">
+        <div class="images">
+          <img src="#" alt="" class="social-media-photo">
+          <img src="#" alt="" class="social-media-photo">
+          <img src="#" alt="" class="social-media-photo">
+        </div>
+      </div>
+      <div class="about-us">
+        <a href="#" class="info">About Us</a>
+        <a href="#" class="info">Company</a>
+      </div>
+      <div class="copyright">&copy; Hate Date 2017</div>
+    </section>
+    </div>
+  </footer>      
+</div>
+    <script src="app.js"></script>
+  </body>
+</html>
