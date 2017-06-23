@@ -12,22 +12,38 @@ $(document).ready(function(){
 $('body').on('click', '.start-button', function(){
   event.preventDefault();
   displayButtons();
-
-});
+  createSubmitBtn();
 
 function displayButtons(){
   $('.mainArea').empty(); //this empties the mainArea so buttons can go there
   for(var i = 0; i < questions.length; i++){
     var button = $("<div>");
     button.attr("value", 1);
-    button.addClass("btn btn-danger");
+    button.addClass("btn btn-danger btn-block btn-lg");
     button.text( questions[i]);
     button.attr("data-name", questions[i]);
     $('.mainArea').append(button);
+
   }
 }
 
-// Initialize Firebase
+function createSubmitBtn() {
+  submitButton= "<p class='text-center' ><a class='btn btn-success btn-lg btn-block submit-button'>Submit!</a></p>";
+  $(".submitBtn").append(submitButton);
+}
+});
+
+$('.submitBtn').on('click', function(){
+
+  $('.btn-primary').each(function(){
+    console.log(this);
+    var buttonText = $(this).attr("data-name");
+    //push clicked-button text into firebase
+    database.ref().push(buttonText);
+    })
+})
+
+//Initialize Firebase
 var config = {
     apiKey: "AIzaSyD05-stFAPDBOgjBtXNZt7VrqoEo8GcTNU",
     authDomain: "hatedate-a1278.firebaseapp.com",
@@ -41,24 +57,21 @@ firebase.initializeApp(config);
 
 var database = firebase.database();
 
-$(".mainArea").on('click', '.btn-danger', function(event){
+$(".mainArea").on('click', '.btn-danger, .btn-primary', function(event){
     // event.preventDefault();
-    $(this).toggleClass("btn btn-primary btn-danger");
+    $(this).toggleClass("btn-primary btn-danger");
     console.log("You clicked: " + $(this).attr("data-name"));
-	  var buttonText = $(this).attr("data-name");
+	  // var buttonText = $(this).attr("data-name");
 		//push clicked-button text into firebase
-		database.ref().push(buttonText);
+		// database.ref.(buttonText);
+
+});
 
 })
-
-})
-
 
 var pushedAnswers =[];
 
-
 //global variabls go here
-
 var questions = [
   "Useless noises like chewing, humming, whistling",
 	"The phrase, 'everything happens for a reason'",

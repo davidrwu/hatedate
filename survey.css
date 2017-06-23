@@ -6,7 +6,6 @@ h2{
 
 .main-button-container{
   margin-top: 25px;
-  max-width: 600px;
   margin-left: auto;
   margin-right: auto;
 }
@@ -15,10 +14,16 @@ body{
   background-color: Indianred;
   font-family: ITC Korinna;
   color: black;
+
 }
 
 .mainArea{
   font-family: ITC Korinna;
   font-size: 24px;
   text-align: center;
+  
+}
+
+.submitBtn{
+
 }
