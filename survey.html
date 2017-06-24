@@ -6,79 +6,23 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-
   <title>Survey HTML page</title>
-
   <!-- Boostrap Stylesheet -->
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-
-
   <!-- Our own CSS stylesheet -->
   <link rel="stylesheet" href="survey.css" media="screen">
-
-  <style type="text/css">
-    body {
-      background-color: Indianred;
-    }
-
-    .navbar-right-custom {
-
-      font-size: 25px;
-    }
-
-    nav {
-      padding-left: 10%;
-      padding-right: 10%;
-      padding-bottom: 10px;
-      background-color: red;
-    }
-
-    .userName {
-      font-size: 30px;
-      text-align: center;
-      padding: 20px;
-    }
-
-    .about-me-content {
-      border: solid;
-      height: 600px;
-      background-color: white;
-      text-align: center;
-      padding: 20px;
-    }
-
-    .hate-content {
-      border: solid;
-      height: 600px;
-      background-color: white;
-      text-align: center;
-      padding: 20px;
-    }
-
-    .wrap {
-      padding-bottom: 15px;
-    }
-
-    #profile-image {
-      padding: 10px;
-    }
-
-    footer {
-      background-color: #FBBBB9;
-      padding: 10px;
-      width: 100%;
-      font-size: 15px;
-    }
-  </style>
+  <link href="https://fonts.googleapis.com/css?family=Permanent+Marker|Lobster+Two" rel="stylesheet">
 
 </head>
 
 <body>
+
+
   <!-- Start of navbar -->
-  <nav class="navbar navbar-default">
+  <nav class="navbar navbar-inverse bg-primary">
     <div class="container-fluid navbar-custom">
 
-      <!-- Brand and toggle get grouped for better mobile display -->
+      <!--Brand and toggle get grouped for better mobile display -->
       <div class="row">
         <div class="navbar-header">
 
@@ -87,7 +31,7 @@
           </div>
         </div>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
+        <!--Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
           <ul class="nav navbar-nav navbar-right navbar-right-custom">
             <li><a href="profile.html">Profile</a></li>
@@ -98,13 +42,13 @@
         <!-- /.navbar-collapse -->
       </div>
     </div>
-    <!-- /.container-fluid -->
+
   </nav>
   <!-- End of navbar -->
 
   <div class="container text-center">
     <div class="row">
-      <h2>HateDate Survey Questions</h2>
+      <h2>Survey Questions</h2>
       <h3>Click the items that you HATE!</h3>
     </div>
   </div>
@@ -123,14 +67,22 @@
   </div>
 
   <!-- Start of footer -->
-  <!-- <div class="row">
-    <footer class="footer">
+  <div class="footer">
+    <div class="container" style="text-align:center">
+      <div class="about-us">
+        <a href="#" class="info">About</a>
+        <a href="index.html">Home</a>
+        <a href="contact.html">Contact</a>
+        <div class="copyright">&copy; Hater Dater 2017</div>
+      </div>
+    </div>
+  </div>
+  <!-- <footer class="footer">
       <section id="social-media-area" style="text-align:center">
         <div class="social-media-content">
           <div class="images">
-            <img src="#" alt="" class="social-media-photo">
-            <img src="#" alt="" class="social-media-photo">
-            <img src="#" alt="" class="social-media-photo">
+            <img src="heart.jpg width =10px height =10px" alt="" class="social-media-photo">
+
           </div>
         </div>
         <div class="about-us">
@@ -140,8 +92,8 @@
         <div class="copyright">&copy; Hate Date 2017</div>
       </section>
   </div>
-  </footer>
-  </div> -->
+  </footer> -->
+
   <!-- End of footer -->
   <script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
   <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
