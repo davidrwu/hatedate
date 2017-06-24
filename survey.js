@@ -9,7 +9,7 @@ $(document).ready(function(){
   initialScreen();
 
 //function to generate questions triggered by clicking start button
-$('body').on('click', '.start-button', function(){
+$('body').on('click', '.start-button', function(event){
   event.preventDefault();
   displayButtons();
   createSubmitBtn();
