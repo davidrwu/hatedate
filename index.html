@@ -1,8 +1,8 @@
-  <!DOCTYPE html>
+ <!DOCTYPE html>
 <html>
   <head>
     <meta charset="UTF-8">
-    <title>FirebaseUI Auth Demo</title>
+    <title>Hate Date</title>
     <script src="https://www.gstatic.com/firebasejs/live/4.1/firebase.js"></script>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://cdn.firebase.com/libs/firebaseui/2.1.1/firebaseui.js"></script>
@@ -13,10 +13,9 @@
     <style type="text/css">
     
     .main {
-      background-color:#F70D1A;
+      background-color: Indianred;
       width:100%;
     }
-
     .logo {
       background-color:black;
       font-weight:bold;
@@ -25,106 +24,105 @@
       font-size:50px;
       margin:0;
     }
-
     h3 {
       font-size:30px;
     }
-
     nav {
       padding-left:10%;
       padding-right:10%;
       padding-bottom:20px;
     }
-
     .btn-info {
       margin-left:30px;
       background-color:#FF2400;
     }
-
     #logo {
       padding-left:50px;
       padding-right:40px;
     }
-
     .navbar-right {
       padding-top:30px;
     }
-
+    .navbar {
+      overflow: auto;
+    }
     .logo,
     .headliner,
     .dropdown {
       color:white;
     }
-
-
-    #location-form {
-    }
-
     .signup{
       text-align: center;
       font-size:20px;
       padding-bottom:70px;
     }
-
     .btn {
       margin-top:10px;
       font-size: 20px;
     }
-
     .btn-mid {
       background-color: black;
       color:white;
     }
-
     .bodySubmit {
       padding-top:20px;
     }
-
     select {
       border-radius: 10px;
       font-size:20px;
     }
-
     footer {
       background-color:#FBBBB9;
       padding:10px;
-      width:100%;
       font-size: 15px;
     }
-
     .info,
     .copyright,
     .images {
       padding:5px;
     }
+    #location-form {
+
+    }
    .weatherDiv {
       padding:10px;
+      color:white;
+      font-size:15px;
     }
     #location-form {
-      position: absolute;
+      position:none;
     }
     .weatherCon {
-      float:right;
-      padding:20px;
+      
     }
     .weatherHeader {
       font-weight: bold;
+      font-size:30px;
+      color:white;
+    }
+    .profileLink {
+      font-size:40px;
     }
  
-
   </style>
 
 </head>
 
 <body>
-<div class="row">
   <nav class="navbar navbar-default">
     <div class="container-fluid navbar-custom">
+
+      <!-- Brand and toggle get grouped for better mobile display -->
+      <div class="row">
+        <div class="navbar-header">
+
+          <div class="col-xs-12 phone-nav">
 
       <div id="loading">Loading...</div>
       <div id="loaded" class="hidden">
           <div id="user-signed-in" class="hidden" style="float:right">
             <p>
+              <a href="profile.html" class="profileLink">My Profile</a><br><br>
               <button id="sign-out">Sign Out</button>
               <button id="delete-account">Delete account</button>
             </p>
@@ -135,18 +133,12 @@
             </div>
           </div>
         </div> 
-    </div>
     
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        <img src="logo.jpg" id="logo">
+        <img src="logo.JPG" id="logo">
 
-        <span id="location-form">
-          <input type="text" id="location-input">
-          <input id="add-weather" type="submit" value="Enter Location">
 
-          
-        <div id="weatherDisplay" class="weatherDiv"></div>
-        </span>
+ 
 
       </div>
     </div><!-- /.navbar-collapse -->
@@ -157,7 +149,15 @@
   <div class="main">
     <div class="row">
       <div class="col-lg-12" style="text-align:center">
-        <h1 class="logo">Hate Date</h1>
+        <h1 class="logo">Hate Date</h1><br>
+
+
+        <span id="location-form">
+          <input type="text" id="location-input">
+          <input id="add-weather" type="submit" value="Enter a Location">      
+        </span>
+         <div id="weatherDisplay" class="weatherDiv"></div>
+
         <h3 class="headliner">We always think about things we hate all the time.
           <p>Why not date based on deal breakers.</p>
         </h3>
@@ -166,6 +166,8 @@
 
   <div class="row signup">
     <div class="col-lg-12">
+
+
       <span class="dropdown">I am a</span>
         <label>
           <select>
@@ -182,7 +184,8 @@
           </label>
       <span class="dropdown">is not a good listener</span>
     </div>
-    <div class="col-lg-12 bodySubmit"> 
+
+
      
   </div>
 </div>
@@ -193,12 +196,7 @@
   <footer class="footer">
     <section id="social-media-area" style="text-align:center">
       <div class="social-media-content">
-        <div class="images">
-          <img src="#" alt="" class="social-media-photo">
-          <img src="#" alt="" class="social-media-photo">
-          <img src="#" alt="" class="social-media-photo">
-        </div>
-      </div>
+       </div>
       <div class="about-us">
         <a href="#" class="info">About Us</a>
         <a href="#" class="info">Company</a>
@@ -208,6 +206,7 @@
     </div>
   </footer>      
 </div>
-    <script src="app.js"></script>
+</div>
+    <script src="index.js"></script>
   </body>
 </html>
