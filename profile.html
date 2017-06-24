@@ -12,6 +12,7 @@
      <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"></script>
     <script src="https://www.gstatic.com/firebasejs/4.1.2/firebase.js"></script>
+   <link href="https://fonts.googleapis.com/css?family=Permanent+Marker|Lobster+Two" rel="stylesheet">
 
     <!-- Our own CSS stylesheet --><!-- 
     <link rel="stylesheet" href="assets/css/styles.css" media="screen"> -->
@@ -32,7 +33,7 @@
       .userName {
         font-size: 30px;
         text-align: center;
-        padding:20px;
+        padding-top:25px;
       }
       .about-me-content {
         border:solid;
@@ -106,29 +107,30 @@
 
   <body>
     <!-- Start of navbar -->
-    <nav class="navbar navbar-default">
-      <div class="container-fluid navbar-custom">
+    <nav class="navbar navbar-inverse bg-primary">
+    <div class="container-fluid navbar-custom">
 
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="row">
-          <div class="navbar-header">
- 
-            <div class="col-xs-12 phone-nav">
-              <img src="logo.JPG" id="logo">
-            </div>
+      <!--Brand and toggle get grouped for better mobile display -->
+      <div class="row">
+        <div class="navbar-header">
+
+          <div class="col-xs-12 phone-nav">
+            <span class="navbar-brand userName"></span>
           </div>
-
-          <!-- Collect the nav links, forms, and other content for toggling -->
-
-            <ul class="nav navbar-nav navbar-right navbar-right-custom">
-              <li><a href="profile.html">My Profile</a></li>
-              <li><a href="survey.html">Survey</a></li>
-              <li><a href="index.html">Log Out</a></li>
-            </ul>
-          </div><!-- /.navbar-collapse -->
         </div>
-      </div><!-- /.container-fluid -->
-    </nav>
+
+        <!--Collect the nav links, forms, and other content for toggling -->
+          <ul class="nav navbar-nav navbar-right navbar-right-custom">
+            <li><a href="profile.html">Profile</a></li>
+            <li><a href="survey.html">Survey</a></li>
+            <li><a href="homepage.html">Logout</a></li>
+          </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+      </div>
+    </div>
+
+  </nav>
     <!-- End of navbar -->
 
 
