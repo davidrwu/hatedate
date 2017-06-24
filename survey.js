@@ -87,7 +87,7 @@ firebase.initializeApp(config);
 var database = firebase.database();
 
 $(".mainArea").on('click', '.btn-danger', function(event){
-    // event.preventDefault();
+    event.preventDefault();
     $(this).toggleClass("btn-primary btn-danger");
     console.log("You clicked: " + $(this).attr("data-name"));
 	  
