@@ -135,7 +135,7 @@ ref.on("child_added", function(childsnapshot) {
   var hates = childsnapshot.val().hates;
   console.log(hates)
 
-
+  $(".userName").html(profileFirstName+" "+profileLastName)
 
  if (firebase.auth().currentUser.uid !== user) {
     $("#hate-content").append(
